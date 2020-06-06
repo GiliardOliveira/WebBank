@@ -13,10 +13,11 @@ mongoose.connect(config.conectionString, {
     useFindAndModify: false
 })
 
-const User = require('./models/userModel')
+const Client = require('./models/clientModel')
 
 
 const indexRoute = require('./routes/indexRoute')
+const clientRoute = require('./routes/clientRoute')
 
 app.use(bodyParser.json({
     limit: '5mb'
@@ -34,5 +35,6 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', indexRoute)
+app.use('/', clientRoute)
 
 module.exports = app
