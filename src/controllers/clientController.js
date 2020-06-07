@@ -18,3 +18,14 @@ exports.post = (req, res, next) => {
             })
         })
 }
+
+exports.get = (req, res, next) => {
+    Client.find({},'name cpf numberAccount balance').
+    then(data => {
+        res.status(200).send(data)
+    }).catch(e => {
+        res.status(400).send({
+            message: 'failed'
+        })
+    })
+}

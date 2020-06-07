@@ -3,12 +3,6 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
 
-    cpf: {
-        type: Number,
-        required: true,
-        index: true,
-        unique: true
-    },
     name: {
         type: String,
         required: true
@@ -17,11 +11,22 @@ const schema = new Schema({
         type: String,
         required: true
     },
+    cpf: {
+        type: Number,
+        required: true,
+        index: true,
+        unique: true
+    },
     numberAccount: {
         type: Number,
         required: true,
         index: true,
         unique: true
+    },
+    active: {
+        type: Boolean,
+        required: true,
+        default: true
     },
     balance: {
         type: Number,
