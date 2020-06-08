@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+const AutoIncrement = require('mongoose-sequence')(mongoose)
+
 
 const schema = new Schema({
 
@@ -12,27 +14,25 @@ const schema = new Schema({
         required: true
     },
     cpf: {
-        type: Number,
+        type: String,
         required: true,
         index: true,
         unique: true
     },
     numberAccount: {
         type: Number,
-        required: true,
         index: true,
-        unique: true
-    },
-    active: {
-        type: Boolean,
-        required: true,
-        default: true
     },
     balance: {
         type: Number,
-        required: true
+        required: true,
     }
 
 })
+schema.plugin(AutoIncrement, {
+    id: 'order_seq',
+    inc_field: 'numberAccount'
+})
+
 
 module.exports = mongoose.model('Client', schema)

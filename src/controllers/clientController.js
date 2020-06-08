@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const Client = mongoose.model('Client')
 
 
-
 exports.post = (req, res, next) => {
     var client = new Client(req.body)
     client
@@ -20,12 +19,43 @@ exports.post = (req, res, next) => {
 }
 
 exports.get = (req, res, next) => {
-    Client.find({},'name cpf numberAccount balance').
+    Client.find({}, 'name cpf numberAccount balance').
     then(data => {
         res.status(200).send(data)
     }).catch(e => {
         res.status(400).send({
             message: 'failed'
+        })
+    })
+}
+
+exports.getByCPF = (req, res, next) => {
+    Client.find({
+        cpf: req.params.cpf
+    }, 'name cpf numberAccount balance').
+    then(data => {
+        res.status(200).send(data)
+    }).catch(e => {
+        res.status(400).send({
+            message: 'failed'
+        })
+    })
+}
+
+
+exports.bankMoveById = (req, res, next) => {
+    Client.findByIdAndUpdate(req.params.id, {
+        $inc: {
+            balance: req.body.balance
+        }
+    }).then(x => {
+        res.status(200).send({
+            message: 'sucess'
+        })
+    }).catch(e => {
+        res.status(400).send({
+            message: 'failed',
+            data: e
         })
     })
 }
