@@ -1,9 +1,38 @@
 const mongoose = require('mongoose')
 const Client = mongoose.model('Client')
+const md5 = require('md5')
+const auth = require('../services/authService')
+
+exports.auth = (req, res, next) => {
+    const data = Client.find({
+        cpf: req.params.cpf,
+        password: md5(req.params.password)
+    })
+    const token = auth.generateToken({
+        cpf: data.cpf,
+        name: data.name
+    }).then(x => {
+        res.status(20).send({
+            token: token,
+            data: {
+                cpf: data.cpf,
+                name: data.name
+            }
+        })
+    })
+
+
+}
+
 
 
 exports.post = (req, res, next) => {
-    var client = new Client(req.body)
+    const client = new Client({
+        name: req.body.name,
+        cpf: req.body.cpf,
+        password: md5(req.body.password),
+        balance: req.body.balance
+    })
     client
         .save()
         .then(x => {
@@ -44,6 +73,7 @@ exports.getByCPF = (req, res, next) => {
 
 
 exports.bankMoveById = (req, res, next) => {
+
     Client.findByIdAndUpdate(req.params.id, {
         $inc: {
             balance: req.body.balance
@@ -58,4 +88,5 @@ exports.bankMoveById = (req, res, next) => {
             data: e
         })
     })
+
 }
