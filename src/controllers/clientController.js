@@ -1,37 +1,13 @@
 const mongoose = require('mongoose')
 const Client = mongoose.model('Client')
-const md5 = require('md5')
-const auth = require('../services/authService')
-
-exports.auth = (req, res, next) => {
-    const data = Client.find({
-        cpf: req.params.cpf,
-        password: md5(req.params.password)
-    })
-    const token = auth.generateToken({
-        cpf: data.cpf,
-        name: data.name
-    }).then(x => {
-        res.status(20).send({
-            token: token,
-            data: {
-                cpf: data.cpf,
-                name: data.name
-            }
-        })
-    })
-
-
-}
-
-
 
 exports.post = (req, res, next) => {
     const client = new Client({
         name: req.body.name,
         cpf: req.body.cpf,
         password: md5(req.body.password),
-        balance: req.body.balance
+        balance: req.body.balance,
+        balanceN: req.body.balanceN
     })
     client
         .save()
@@ -71,12 +47,17 @@ exports.getByCPF = (req, res, next) => {
     })
 }
 
+exports.depositById = (req, res, next) => {
 
-exports.bankMoveById = (req, res, next) => {
-
+    var var1 = parseInt(req.body.balance)
+    if (var1 < 0) {
+        var value = Error
+    } else {
+        value = req.body.balance
+    }
     Client.findByIdAndUpdate(req.params.id, {
         $inc: {
-            balance: req.body.balance
+            balance: value
         }
     }).then(x => {
         res.status(200).send({
@@ -84,7 +65,35 @@ exports.bankMoveById = (req, res, next) => {
         })
     }).catch(e => {
         res.status(400).send({
-            message: 'failed',
+            message: 'enter a correct value ',
+            data: e
+        })
+    })
+}
+
+exports.withdrawById = (req, res, next) => {
+    var val1 = parseInt(req.body.balance)
+    var val2 = parseInt(req.body.balanceN)
+    if (val1 < val2) {
+        var value = Error
+    } else if (val1 === val2) {
+        value = (val1) * (-1)
+    } else if (val1 === 0) {
+        value = Error
+    } else {
+        value = ((val1 - val2) * (-1))
+    }
+    Client.findByIdAndUpdate(req.params.id, {
+        $inc: {
+            balance: value
+        }
+    }).then(x => {
+        res.status(200).send({
+            message: 'sucess'
+        })
+    }).catch(e => {
+        res.status(400).send({
+            message: 'enter a correct value ',
             data: e
         })
     })
