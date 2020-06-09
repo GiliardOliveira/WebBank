@@ -1,7 +1,55 @@
 const mongoose = require('mongoose')
 const Client = mongoose.model('Client')
+const authUser = require('../services/authUser')
+const auth = require('../services/authService')
+const md5 = require('md5')
 
-exports.post = (req, res, next) => {
+
+exports.authentic = async (req, res, next) => {
+    try {
+        const client = await authUser.authenticate({
+            cpf: req.body.cpf,
+            password: md5(req.body.password)
+        })
+        // console.log(client)
+
+        if (!client) {
+            res.status(404).send({
+                message: 'User not found'
+            })
+            return
+        }
+        const token = await auth.generateToken({
+            id: client._id,
+            cpf: client.cpf,
+            name: client.name,
+            numberAccount: client.numberAccount,
+            balance: client.balance
+        })
+        res.status(200).send({
+            token: token,
+            data: {
+                name: client.name,
+                cpf: client.cpf,
+                id: client._id,
+                numberAccount: client.numberAccount,
+                balance: client.balance
+
+            }
+        })
+    } catch (e) {
+        res.status(400).send({
+            message: 'failed',
+            data: e
+        })
+    }
+}
+
+
+exports.post = async (req, res, next) => {
+    const token = req.body.token || req.query.token || req.headers['x-access-token']
+    const data = await auth.decodeToken(token)
+
     const client = new Client({
         name: req.body.name,
         cpf: req.body.cpf,

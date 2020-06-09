@@ -15,13 +15,13 @@ exports.authorize = function (req, res, next) {
 
     if (!token) {
         res.status(401).json({
-            message: 'Acesso Restrito'
+            message: 'Restrict'
         });
     } else {
         jwt.verify(token, global.SALT_KEY, function (error, decoded) {
             if (error) {
                 res.status(401).json({
-                    message: 'Token Inválido'
+                    message: 'Token invalid'
                 });
             } else {
                 next();
@@ -35,20 +35,20 @@ exports.isAdmin = function (req, res, next) {
 
     if (!token) {
         res.status(401).json({
-            message: 'Token Inválido'
+            message: 'Token invalid'
         });
     } else {
         jwt.verify(token, global.SALT_KEY, function (error, decoded) {
             if (error) {
                 res.status(401).json({
-                    message: 'Token Inválido'
+                    message: 'Token invalid'
                 });
             } else {
                 if (decoded.roles.includes('admin')) {
                     next();
                 } else {
                     res.status(403).json({
-                        message: 'Esta funcionalidade é restrita para administradores'
+                        message: 'restrict'
                     });
                 }
             }
