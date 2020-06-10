@@ -10,24 +10,24 @@
 
   <mat-form-field style="width: 100%">
     <mat-label>NOME</mat-label>
-    <input matInput required type="text" [(ngModel)]="nome">
+    <input matInput required type="text" [(ngModel)]="cliente.name">
   </mat-form-field>
 
   <br />
 
   <mat-form-field style="width: 100%">
     <mat-label>CPF</mat-label>
-    <input matInput requiredtype="text" [(ngModel)]="cpf">
+    <input matInput requiredtype="text" [(ngModel)]="cliente.cpf">
   </mat-form-field>
 
   <br />
 
   <mat-form-field style="width: 100%">
     <mat-label>SENHA</mat-label>
-    <input type="text" matInput required [(ngModel)]="password">
+    <input type="text" matInput required [(ngModel)]="cliente.password">
   </mat-form-field>
 
-  <button class="button" mat-flat-button color="primary" (click)="createConta(nome,cpf,password)">CADASTRAR</button>
+  <button class="button" mat-flat-button color="primary" (click)="createConta()">CADASTRAR</button>
 
 
 </mat-card>

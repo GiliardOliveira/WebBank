@@ -10,25 +10,14 @@ import { FormBuilder } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-
-  nome: Text
-  cpf: Text
-  password: Text
+  cliente = {} as Cliente
 
   constructor(private dataService: DataServiceService, private formBuilder: FormBuilder) { }
 
-  public createConta(nome: Text, cpf: Text, password: Text) {
-    const cliente: Cliente = <Cliente><unknown>{
-      "name": nome,
-      "cpf": cpf,
-      "password": password
-    }
-    console.log(cliente)
-    this.postClient(cliente)
-  }
 
-  public postClient(cliente: Cliente) {
-    this.dataService.createCliente(cliente).subscribe()
+  public createConta() {
+    console.log(this.cliente)
+    this.dataService.postCliente(this.cliente).subscribe()
   }
 
   ngOnInit(): void {

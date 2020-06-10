@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Cliente } from 'src/app/models/cliente.model'
 
 @Injectable({
@@ -11,8 +11,10 @@ export class DataServiceService {
 
   constructor(private http: HttpClient) { }
 
-  public createCliente(cliente: Cliente) {
-    return this.http.post<Cliente>(this.apiUrl, cliente)
+
+  public postCliente(cliente: Cliente) {
+    console.log(cliente)
+    return this.http.post(this.apiUrl, cliente)
   }
 
 }

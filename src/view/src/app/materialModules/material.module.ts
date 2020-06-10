@@ -28,7 +28,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
         MatInputModule,
         MatGridListModule
     ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    
 })
 
 export class MaterialModules { }
