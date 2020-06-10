@@ -1,0 +1,33 @@
+.app-header {
+  color: white;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+}
+
+.box {
+  position: relative;
+  top: 1;
+  opacity: 1;
+  padding: 60px 50px 40px 50px;
+  width: 100%;
+  border-radius: 3px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  z-index: 5;
+  max-width: 330px;
+  transition: 0.3s;
+  margin: auto;
+  text-align: center;
+  margin-top: 50px;
+}
+
+
+.button {
+  margin-top: 20px;
+}
