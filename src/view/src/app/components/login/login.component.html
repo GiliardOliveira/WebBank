@@ -3,7 +3,7 @@
   <div>
     <h2>Banco</h2>
   </div>
-  <button mat-flat-button>CRIE SUA CONTA</button>
+  <button mat-flat-button (click)="register()">CRIE SUA CONTA</button>
 </mat-toolbar>
 
 
@@ -20,8 +20,7 @@
     <input type="password" matInput required>
 
   </mat-form-field>
-  <button class="button" mat-flat-button color="primary">ENTRAR
-  </button>
+  <button class="button" mat-flat-button color="primary">ENTRAR</button>
 
 
 </mat-card>

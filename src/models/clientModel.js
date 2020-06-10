@@ -25,7 +25,6 @@ const schema = new Schema({
     },
     balance: {
         type: Number,
-        required: true,
     },
     balanceN: {
         type: Number

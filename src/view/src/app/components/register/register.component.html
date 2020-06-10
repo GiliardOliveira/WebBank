@@ -1,0 +1,33 @@
+<mat-toolbar class="app-header" color="primary">
+
+  <div>
+    <h2>Cadastre seus dados</h2>
+  </div>
+
+</mat-toolbar>
+
+<mat-card class="box">
+
+  <mat-form-field style="width: 100%">
+    <mat-label>NOME</mat-label>
+    <input matInput required type="text" [(ngModel)]="nome">
+  </mat-form-field>
+
+  <br />
+
+  <mat-form-field style="width: 100%">
+    <mat-label>CPF</mat-label>
+    <input matInput requiredtype="text" [(ngModel)]="cpf">
+  </mat-form-field>
+
+  <br />
+
+  <mat-form-field style="width: 100%">
+    <mat-label>SENHA</mat-label>
+    <input type="text" matInput required [(ngModel)]="password">
+  </mat-form-field>
+
+  <button class="button" mat-flat-button color="primary" (click)="createConta(nome,cpf,password)">CADASTRAR</button>
+
+
+</mat-card>

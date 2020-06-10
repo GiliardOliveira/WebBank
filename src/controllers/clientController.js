@@ -47,8 +47,8 @@ exports.authentic = async (req, res, next) => {
 
 
 exports.post = async (req, res, next) => {
-    const token = req.body.token || req.query.token || req.headers['x-access-token']
-    const data = await auth.decodeToken(token)
+    // const token = req.body.token || req.query.token || req.headers['x-access-token']
+    // const data = await auth.decodeToken(token)
 
     const client = new Client({
         name: req.body.name,
