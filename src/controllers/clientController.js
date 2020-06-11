@@ -8,14 +8,14 @@ const md5 = require('md5')
 exports.authentic = async (req, res, next) => {
     try {
         const client = await authUser.authenticate({
-            cpf: req.body.cpf,
-            password: md5(req.body.password)
+            cpf: req.body.cpf
         })
-        // console.log(client)
+        console.log(client)
 
         if (!client) {
-            res.status(404).send({
-                message: 'User not found'
+            res.status(200).send({
+                message: 'User not found',
+                status: false
             })
             return
         }
@@ -28,13 +28,13 @@ exports.authentic = async (req, res, next) => {
         })
         res.status(200).send({
             token: token,
+            status: true,
+            id: client._id,
             data: {
                 name: client.name,
                 cpf: client.cpf,
-                id: client._id,
                 numberAccount: client.numberAccount,
                 balance: client.balance
-
             }
         })
     } catch (e) {
@@ -45,9 +45,8 @@ exports.authentic = async (req, res, next) => {
     }
 }
 
+exports.post = (req, res, next) => {
 
-exports.post = async (req, res, next) => {
-    
     const client = new Client({
         name: req.body.name,
         cpf: req.body.cpf,
@@ -81,8 +80,8 @@ exports.get = (req, res, next) => {
 }
 
 exports.getByCPF = (req, res, next) => {
-    Client.find({
-        cpf: req.params.cpf
+    Client.findById(res.params._id, {
+        _id: req.params._id
     }, 'name cpf numberAccount balance').
     then(data => {
         res.status(200).send(data)

@@ -5,10 +5,10 @@ const auth = require('../services/authService')
 
 
 router.post('/', controller.post)
-router.get('/clients', auth.authorize, controller.get)
-router.get('/clients/:cpf', auth.authorize, controller.getByCPF)
-router.put('/deposit/:id', auth.authorize, controller.depositById)
-router.put('/withdraw/:id', auth.authorize, controller.withdrawById)
+router.get('/clients', controller.get)
+router.get('/:cpf', controller.getByCPF)
+router.put('/deposit/:id', controller.depositById)
+router.put('/withdraw/:id', controller.withdrawById)
 router.post('/auth', controller.authentic)
 
 

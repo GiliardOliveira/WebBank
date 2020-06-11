@@ -5,10 +5,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModules } from './materialModules/material.module';
 import { LoginComponent } from './components/login/login.component';
-import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
-
 import { HttpClientModule } from '@angular/common/http';
 import { DataServiceService } from './services/data-service.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +15,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     LoginComponent,
-    MainNavComponent,
     DashboardComponent,
     RegisterComponent
   ],
