@@ -1,14 +1,14 @@
 <mat-toolbar class="app-header" color="primary">
 
   <div>
-    <h2>BANCO</h2>
+    <h2>WEB-BANK</h2>
   </div>
   <button mat-flat-button (click)="register()">CRIE SUA CONTA</button>
 </mat-toolbar>
 <div style="height: 60px;"></div>
 
 <mat-card class="box">
-  {{message}}
+  
   <mat-form-field style="width: 100%">
     <mat-label>CPF</mat-label>
     <input matInput required [(ngModel)]="cliente.cpf">

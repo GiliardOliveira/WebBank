@@ -79,9 +79,22 @@ exports.get = (req, res, next) => {
     })
 }
 
+
+exports.getByID = (req, res, next) => {
+    Client.findById(req.params.id).
+    then(data => {
+        res.status(200).send(data)
+    }).catch(e => {
+        res.status(400).send({
+            message: 'failed'
+        })
+    })
+}
+
+
 exports.getByCPF = (req, res, next) => {
-    Client.findById(res.params._id, {
-        _id: req.params._id
+    Client.find({
+        cpf: req.params.cpf
     }, 'name cpf numberAccount balance').
     then(data => {
         res.status(200).send(data)
